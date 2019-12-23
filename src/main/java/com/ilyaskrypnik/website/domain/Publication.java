@@ -1,6 +1,7 @@
 package com.ilyaskrypnik.website.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "publication")
 @Data
+@NoArgsConstructor
 public class Publication {
 
     @Id
