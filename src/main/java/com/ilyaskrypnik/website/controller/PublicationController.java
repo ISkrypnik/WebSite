@@ -1,23 +1,20 @@
 package com.ilyaskrypnik.website.controller;
 
+import com.ilyaskrypnik.website.dao.PublicationDao;
 import com.ilyaskrypnik.website.domain.Publication;
-import com.ilyaskrypnik.website.repo.PublicationRepository;
-import org.springframework.beans.BeanUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("publication")
+@RequiredArgsConstructor
 public class PublicationController {
 
-    private final PublicationRepository publicationRepository;
-
-    PublicationController(PublicationRepository publicationRepository) {
-        this.publicationRepository = publicationRepository;
-    }
+    private final PublicationDao publicationDao;
 
     @GetMapping
     public Iterable<Publication> list() {
-        return publicationRepository.findAll();
+        return publicationDao.getAll();
     }
 
     @GetMapping("{id}")
@@ -27,17 +24,16 @@ public class PublicationController {
 
     @PostMapping
     public Publication create(@RequestBody Publication publication) {
-        return publicationRepository.save(publication);
+        return publicationDao.save(publication);
     }
 
     @PutMapping("{id}")
     public Publication update(@PathVariable("id") Publication publicationFromDb, @RequestBody Publication publication) {
-        BeanUtils.copyProperties(publication, publicationFromDb, "id");
-        return publicationRepository.save(publicationFromDb);
+        return publicationDao.update(publicationFromDb, publication);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Publication publication) {
-        publicationRepository.delete(publication);
+        publicationDao.delete(publication);
     }
 }
