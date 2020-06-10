@@ -11,7 +11,6 @@ import java.util.Map;
 @Controller
 public class RegistrationController {
 
-
     private final UserService userService;
 
     RegistrationController(UserService userService) {
