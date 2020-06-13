@@ -3,6 +3,7 @@ package com.ilyaskrypnik.website.controller;
 import com.ilyaskrypnik.website.dao.PublicationDao;
 import com.ilyaskrypnik.website.domain.Publication;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,23 +14,23 @@ public class PublicationController {
     private final PublicationDao publicationDao;
 
     @GetMapping
-    public Iterable<Publication> list() {
-        return publicationDao.getAll();
+    public ResponseEntity<Iterable<Publication>> list() {
+        return ResponseEntity.ok(publicationDao.getAll());
     }
 
     @GetMapping("{id}")
-    public Publication getOne(@PathVariable("id") Publication publication) {
-        return publication;
+    public ResponseEntity<Publication> getOne(@PathVariable("id") Publication publication) {
+        return ResponseEntity.ok(publication);
     }
 
     @PostMapping
-    public Publication create(@RequestBody Publication publication) {
-        return publicationDao.save(publication);
+    public ResponseEntity<Publication> create(@RequestBody Publication publication) {
+        return ResponseEntity.ok(publicationDao.save(publication));
     }
 
     @PutMapping("{id}")
-    public Publication update(@PathVariable("id") Publication publicationFromDb, @RequestBody Publication publication) {
-        return publicationDao.update(publicationFromDb, publication);
+    public ResponseEntity<Publication> update(@PathVariable("id") Publication publicationFromDb, @RequestBody Publication publication) {
+        return ResponseEntity.ok(publicationDao.update(publicationFromDb, publication));
     }
 
     @DeleteMapping("{id}")
