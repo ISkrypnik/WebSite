@@ -7,6 +7,7 @@ import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.annotations.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,6 +35,7 @@ public class PublicationController {
     @ApiOperation(value = "Создаёт объект Публикация.", notes = "Позволяет создать публикацию с переданными значениями. " +
             "Возвращается созданный объект Публикация.")
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER')")
     public ResponseEntity<Publication> create(@RequestBody Publication publication) {
         return ResponseEntity.ok(publicationDao.save(publication));
     }
@@ -41,6 +43,7 @@ public class PublicationController {
     @ApiOperation(value = "Имзеняет объект Публикация.", notes = "Позволяет изенить публикацию переданными значениями. " +
             "Возвращается изменённый объект Публикация.")
     @PutMapping("{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER')")
     public ResponseEntity<Publication> update(@PathVariable("id") Publication publicationFromDb, @RequestBody Publication publication) {
         return ResponseEntity.ok(publicationDao.update(publicationFromDb, publication));
     }
@@ -48,6 +51,7 @@ public class PublicationController {
     @ApiOperation(value = "Удалить объект Публикация.", notes = "Удаляет объект Публикация по переданному id, переданному " +
             "через перменную пути.")
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER')")
     public void delete(@PathVariable("id") Publication publication) {
         publicationDao.delete(publication);
     }
