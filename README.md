@@ -20,7 +20,7 @@ Swagger can be accessed without authentication at /swagger-ui.html
 * Swagger2
     
 
-###//ToDo with this README
+###ToDo with this README
 - [ ] Add instruction how to start app with Gradle
 - [ ] Add instruction how to get Swagger documented endpoints
 - [ ] Describe front part (or not)
