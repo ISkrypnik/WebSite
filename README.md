@@ -1,6 +1,8 @@
 # Web Site
 WebSite is a Java application that should be used as a backend for internet page.
 
+As a task tracker I am using Github Projects. Link to [WebSite page](https://github.com/ISkrypnik/WebSite/projects/1).
+
 ## Description
 In current iteration Publication entities can be created, read, updated and deleted with help of REST.
 Available only for Roles Manager and Admin. Role User can only get list of Publications.
