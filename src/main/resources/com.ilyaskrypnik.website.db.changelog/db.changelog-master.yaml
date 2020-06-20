@@ -1,0 +1,9 @@
+databaseChangeLog:
+
+#  Первоначальная структура
+  - include:
+      file: com.ilyaskrypnik.website.db.changelog\db.changelog-1.0.yaml
+
+#  Патчи
+#  - include:
+#      file: com.ilyaskrypnik.website.db.changelog\db.changelog.patch.yaml

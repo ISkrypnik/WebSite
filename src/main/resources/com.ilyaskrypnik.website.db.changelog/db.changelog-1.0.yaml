@@ -1,0 +1,113 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1592458784317-1
+      author: iskrypnik
+      changes:
+        - createTable:
+            tableName: publication
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: publication_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: text
+                  type: VARCHAR(255)
+        - sql:
+            comment: Fill publication table with init values
+            splitStatements: true
+            sql: insert into publication (id, name, text) values (1, 'VueJS', 'Text about VueJS'), (2, 'Angular', 'Text about Angular'), (3, 'React', 'Text about React');
+            stripComments: true
+
+  - changeSet:
+      id: 1592458784317-2
+      author: iskrypnik
+      changes:
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: roles
+                  type: VARCHAR(255)
+        - sql:
+            comment: Fill user_role table with init values
+            splitStatements: true
+            sql: insert into user_role (user_id, roles) values (1, 'USER');
+            stripComments: true
+
+  - changeSet:
+      id: 1592458784317-3
+      author: iskrypnik
+      changes:
+        - createTable:
+            tableName: usr
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: usr_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: is_active
+                  type: BOOLEAN
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+        - sql:
+            comment: Fill usr table with init values
+            splitStatements: true
+            sql: insert into usr (id, username, is_active, password) values (1, 'guest', true, '$2a$10$jyX4L7ohpKi5ON1GUlsGwOj93o81t7DfZxwEDt8wnZyOoKQ48YtYu');
+            stripComments: true
+
+  - changeSet:
+      id: 1592458784317-4
+      author: iskrypnik
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_role
+            constraintName: fkfpm8swft53ulq2hl11yplpr5
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: usr
+            validate: true
+
+  - changeSet:
+      id: 1592458784317-5
+      author: iskrypnik
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            sequenceName: hibernate_sequence
+            startValue: 1
