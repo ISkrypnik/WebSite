@@ -1,0 +1,5 @@
+liquibase:
+  changelog:
+    path: src/main/resources/com.ilyaskrypnik.website.db.changelog/
+  domain:
+    package: java\com\ilyaskrypnik\website\domain
