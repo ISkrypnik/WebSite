@@ -3,9 +3,9 @@
 </template>
 
 <script>
-    import PublicationsList from "../components/publications/PublicationsList.vue";
+import PublicationsList from "../components/publications/PublicationsList.vue";
 
-    export default {
+export default {
         components: {
             PublicationsList
         },

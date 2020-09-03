@@ -9,14 +9,17 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
+
     export default {
-        props: ['publication', 'editPublication', 'deletePublication'],
+        props: ['publication', 'editPublication'],
         methods: {
+          ...mapActions(['removePublicationAction']),
             edit() {
                 this.editPublication(this.publication)
             },
             del() {
-                this.deletePublication(this.publication)
+                this.removePublicationAction(this.publication)
             }
         }
     }
