@@ -3,19 +3,12 @@
 </template>
 
 <script>
-    import PublicationsList from "../components/publications/PublicationsList.vue";
-    import {mapActions} from "vuex";
+import PublicationsList from "../components/publications/PublicationsList.vue";
 
-    export default {
+export default {
         components: {
             PublicationsList
         },
-        // created() {
-        //   // ...mapActions(['initPublicationsAction']),
-        //   console.log('CREATED APP')
-        //   mapActions(['initPublicationsAction']),
-        //       this.initPublicationsAction
-        // },
         data() {
             return {
                 publications: []

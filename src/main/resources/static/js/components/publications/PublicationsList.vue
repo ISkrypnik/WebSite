@@ -5,52 +5,39 @@
                          :key="publication.id"
                          :publication="publication"
                          :editPublication="editPublication"
-                         />
+        />
     </div>
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex'
-    import PublicationRow from "components/publications/PublicationRow.vue"
-    import PublicationForm from "components/publications/PublicationForm.vue"
+import { mapActions, mapGetters } from 'vuex'
+import PublicationRow from "components/publications/PublicationRow.vue"
+import PublicationForm from "components/publications/PublicationForm.vue"
 
-    export default {
-        // props: ['publications'],
-        components: {
-            PublicationRow,
-            PublicationForm
+export default {
+    components: {
+        PublicationRow,
+        PublicationForm
+    },
+    data() {
+        return {
+            publication: null
+        }
+    },
+    created() {
+        this.getInitialFetch()
+    },
+    computed: mapGetters(['publications']),
+    methods: {
+        ...mapActions(['initPublicationsAction']),
+        getInitialFetch() {
+            this.initPublicationsAction()
         },
-        data() {
-            return {
-                publication: null
-            }
-        },
-        // created: mapActions(['initPublicationsAction']),
-      created() {
-          this.getInitialFetch()
-      },
-      computed: mapGetters(['publications']),
-
-
-
-      // Moved to publication-store.initPublicationsAction
-      // created: function () {
-        //     this.$resource('/publication{/id}').get().then(response =>
-        //         response.json().then(data =>
-        //             data.forEach(publication => this.publications.push(publication))
-        //         )
-        //     )
-        // },
-        methods: {
-            ...mapActions(['initPublicationsAction']),
-            getInitialFetch() {
-                this.initPublicationsAction()
-            },
-            editPublication(publication) {
-                this.publication = publication
-            }
+        editPublication(publication) {
+            this.publication = publication
         }
     }
+}
 </script>
 
 <style>
