@@ -28,7 +28,7 @@
         methods: {
           ...mapActions(['addPublicationAction', 'updatePublicationAction']),
             save() {
-                let publication = {name: this.name, text: this.text};
+                let publication = {id: this.id, name: this.name, text: this.text};
 
                 if (this.id) {
                   //Moved to publication-store.updatePublicationAction
