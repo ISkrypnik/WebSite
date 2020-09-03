@@ -7,18 +7,10 @@
 </template>
 
 <script>
-    function getIndex(list, id) {
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].id === id) {
-                return i
-            }
-        }
-
-        return -1
-    }
+    import { mapActions } from 'vuex'
 
     export default {
-        props: ['publications', 'publicationAttr'],
+        props: ['publicationAttr'],
         data() {
             return {
                 id: '',
@@ -34,27 +26,37 @@
             }
         },
         methods: {
+          ...mapActions(['addPublicationAction', 'updatePublicationAction']),
             save() {
                 let publication = {name: this.name, text: this.text};
 
                 if (this.id) {
-                    this.$resource('/publication{/id}').update({id: this.id}, publication).then(result =>
-                        result.json().then(data => {
-                            let index = getIndex(this.publications, data.id)
-                            this.publications.splice(index, 1, data)
-                            this.id = '';
-                            this.name = '';
-                            this.text = '';
-                        })
-                    )
+                  //Moved to publication-store.updatePublicationAction
+                  //   this.$resource('/publication{/id}').update({id: this.id}, publication).then(result =>
+                  //       result.json().then(data => {
+                  //           let index = getIndex(this.publications, data.id)
+                  //           this.publications.splice(index, 1, data)
+                  //           this.id = '';
+                  //           this.name = '';
+                  //           this.text = '';
+                  //       })
+                  //   )
+                  this.updatePublicationAction(publication)
+                  this.id = ''
+                  this.name = ''
+                  this.text = ''
                 } else {
-                    this.$resource('/publication{/id}').save({}, publication).then(result =>
-                        result.json().then(data => {
-                            this.publications.push(data)
-                            this.name = ''
-                            this.text = ''
-                        })
-                    )
+                  this.addPublicationAction(publication)
+                  this.name = ''
+                  this.text = ''
+                  //Moved to publication-store.addPublicationAction
+                    // this.$resource('/publication{/id}').save({}, publication).then(result =>
+                    //     result.json().then(data => {
+                    //         this.publications.push(data)
+                    //         this.name = ''
+                    //         this.text = ''
+                    //     })
+                    // )
                 }
             }
         }
