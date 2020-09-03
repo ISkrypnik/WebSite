@@ -38,7 +38,7 @@ export default new Vuex.Store({
     },
     actions: {
         async addPublicationAction({ commit, state }, publication) {
-            const result = await publicationsApi.save({}, publication)
+            const result = await publicationsApi.add(publication)
             const data = await result.json()
             const index = state.publications.findIndex(item => item.id === data.id)
 
@@ -49,12 +49,12 @@ export default new Vuex.Store({
             }
         },
         async updatePublicationAction({commit}, publication) {
-            const result = await publicationsApi.update({id: this.id}, publication)
+            const result = await publicationsApi.update(publication)
             const data = await result.json()
             commit('updatePublicationMutation', data)
         },
         async removePublicationAction({commit}, publication) {
-            const result = await publicationsApi.remove({id: publication.id})
+            const result = await publicationsApi.remove(publication.id)
             if (result.ok) {
                 commit('removePublicationMutation', publication)
             }
