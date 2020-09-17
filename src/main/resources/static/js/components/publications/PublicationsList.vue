@@ -1,12 +1,12 @@
 <template>
-    <div style="position: relative; width: 300px;">
+    <v-layout align-content-space-around justify-start column>
         <publication-form :publicationAttr="publication"/>
         <publication-row v-for="publication in publications"
                          :key="publication.id"
                          :publication="publication"
                          :editPublication="editPublication"
         />
-    </div>
+    </v-layout>
 </template>
 
 <script>
