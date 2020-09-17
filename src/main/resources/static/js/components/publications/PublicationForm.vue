@@ -1,9 +1,11 @@
 <template>
-    <div>
-        <input type="text" placeholder="Write publication name" v-model="name"/>
-        <input type="text" placeholder="Write publication text" v-model="text"/>
-        <input type="button" value="Save" @click="save"/>
-    </div>
+    <v-layout column>
+        <v-text-field label="Publication name" placeholder="Write publication name" v-model="name" solo/>
+        <v-text-field label="Publication text" placeholder="Write publication text" v-model="text" solo/>
+        <v-btn @click="save">
+            Save
+        </v-btn>
+    </v-layout>
 </template>
 
 <script>
